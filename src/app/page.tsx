@@ -5,6 +5,7 @@ import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
+import References from "@/components/References";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <Projects />
       <Testimonials />
       <Contact />
+      <References />
       <Footer />
     </>
   );

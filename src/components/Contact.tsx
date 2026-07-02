@@ -29,9 +29,12 @@ export default function Contact() {
 
           <div className="bg-white rounded-2xl border border-black/8 divide-y divide-black/8 shadow-sm">
             {[
-              { label: "Email",    value: "salmoskiee@gmail.com", icon: "📧" },
-              { label: "Location", value: "Philippines",           icon: "📍" },
-              { label: "Status",   value: "Available for work",    icon: "💼" },
+              { label: "Email",       value: "salmoskiee@gmail.com",                        icon: "📧" },
+              { label: "Phone",       value: "+63 9929598173",                              icon: "📱" },
+              { label: "Address",     value: "Purok 10 Brgy. Militar, Palayan City, NE 3132", icon: "📍" },
+              { label: "Birthday",    value: "July 29, 2003",                               icon: "🎂" },
+              { label: "Nationality", value: "Filipino",                                    icon: "🇵🇭" },
+              { label: "Status",      value: "Available for work",                          icon: "💼" },
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-4 px-6 py-4">
                 <span className="text-lg">{item.icon}</span>
