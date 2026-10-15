@@ -78,7 +78,7 @@ export default function TechStack() {
               onClick={() => setActive(f.key)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 active === f.key
-                  ? "bg-[#111] text-white"
+                  ? "bg-[#111] text-white scale-105"
                   : "bg-white text-[#555] border border-black/10 hover:border-black/30 hover:text-[#111]"
               }`}
             >
@@ -88,11 +88,12 @@ export default function TechStack() {
         </div>
 
         {/* Icon grid */}
-        <div className={`reveal delay-2 ${inView ? "visible" : ""} grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3`}>
-          {visible.map((tool) => (
+        <div key={active} className={`reveal delay-2 ${inView ? "visible" : ""} grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3`}>
+          {visible.map((tool, i) => (
             <div
               key={tool.name}
-              className="bg-white rounded-2xl border border-black/8 p-4 flex flex-col items-center gap-2.5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default group"
+              className={`${inView ? "pop-in" : ""} bg-white rounded-2xl border border-black/8 p-4 flex flex-col items-center gap-2.5 hover:shadow-md hover:-translate-y-1 transition-all duration-200 cursor-default group`}
+              style={{ animationDelay: `${0.15 + i * 0.025}s` }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -100,7 +101,7 @@ export default function TechStack() {
                 alt={tool.name}
                 width={32}
                 height={32}
-                className="opacity-80 group-hover:opacity-100 transition-opacity"
+                className="opacity-80 group-hover:opacity-100 group-hover:scale-125 group-hover:-rotate-6 transition-all duration-300"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
               />
               <span className="text-[11px] text-[#666] text-center font-medium leading-tight">{tool.name}</span>

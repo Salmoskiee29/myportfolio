@@ -42,14 +42,104 @@
 /* scroll reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
-              transform 0.65s cubic-bezier(0.16,1,0.3,1);
+  transform: translateY(32px) scale(0.98);
+  filter: blur(6px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
+              transform 0.8s cubic-bezier(0.16,1,0.3,1),
+              filter 0.8s cubic-bezier(0.16,1,0.3,1);
 }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal.visible { opacity: 1; transform: none; filter: none; }
 .delay-1 { transition-delay: 0.08s; }
 .delay-2 { transition-delay: 0.16s; }
 .delay-3 { transition-delay: 0.24s; }
 .delay-4 { transition-delay: 0.32s; }
 .delay-5 { transition-delay: 0.40s; }
 .delay-6 { transition-delay: 0.48s; }
+
+/* ── Hero name: letters rise in one by one ─────────────── */
+.letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.5em) rotate(6deg);
+  filter: blur(6px);
+  animation: letter-in 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+@keyframes letter-in { to { opacity: 1; transform: none; filter: none; } }
+.letter:hover { animation: letter-bounce 0.5s ease; opacity: 1; filter: none; }
+@keyframes letter-bounce {
+  0%, 100% { transform: none; }
+  40% { transform: translateY(-0.12em) scaleY(1.05); }
+}
+
+/* ── Gentle float for the photo ────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.float { animation: float 6s ease-in-out infinite; }
+
+/* ── Ping ring on the "open to opportunities" dot ──────── */
+.pulse-dot { position: relative; }
+.pulse-dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: 9999px;
+  background: inherit; animation: ping 1.6s cubic-bezier(0,0,0.2,1) infinite;
+}
+@keyframes ping { 75%, 100% { transform: scale(2.6); opacity: 0; } }
+
+/* ── Light sweep across buttons on hover ───────────────── */
+.shine { position: relative; overflow: hidden; }
+.shine::after {
+  content: ""; position: absolute; top: 0; left: -120%;
+  width: 60%; height: 100%;
+  background: linear-gradient(110deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.7s ease;
+}
+.shine:hover::after { left: 160%; }
+
+/* ── Underline that grows from the left ────────────────── */
+.link-underline { position: relative; }
+.link-underline::after {
+  content: ""; position: absolute; left: 0; bottom: -4px;
+  width: 100%; height: 1.5px; background: #111;
+  transform: scaleX(0); transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.link-underline:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* ── Tech tile pop when the filter changes ─────────────── */
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.7) translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+.pop-in { animation: pop-in 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+
+/* ── Mouse-follow 3D tilt (driven by Effects.tsx) ──────── */
+.tilt {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease;
+}
+.tilt:hover { transition-duration: 0.1s, 0.3s; }
+
+/* ── Wiggle for emoji/icons ────────────────────────────── */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-12deg) scale(1.15); }
+  75% { transform: rotate(10deg) scale(1.15); }
+}
+.group:hover .wiggle { animation: wiggle 0.6s ease; }
+
+/* ── Infinite marquee ──────────────────────────────────── */
+.marquee { display: flex; gap: 2.5rem; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee-track { display: flex; flex-shrink: 0; gap: 2.5rem; min-width: 100%; animation: marquee 35s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(calc(-100% - 2.5rem)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal, .letter { opacity: 1; transform: none; filter: none; }
+}

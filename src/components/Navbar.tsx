@@ -1,7 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const links = ["About", "Tools", "Projects", "Contact"];
+const links = [
+  { label: "Case Study", href: "#case-study" },
+  { label: "Projects", href: "#projects" },
+  { label: "Services", href: "#services" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,22 +20,22 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"}`}>
+    <nav className={`fade-up-1 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"}`}>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <span className="text-xl font-bold text-[#111]">Psalm</span>
 
         <ul className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            <li key={l}>
-              <a href={`#${l.toLowerCase()}`} className="text-[#555] hover:text-[#111] text-sm font-medium transition-colors">
-                {l}
+            <li key={l.label}>
+              <a href={l.href} className="link-underline text-[#555] hover:text-[#111] text-sm font-medium transition-colors">
+                {l.label}
               </a>
             </li>
           ))}
         </ul>
 
         <a href="#contact"
-          className="hidden md:block text-sm font-medium px-5 py-2 rounded-full bg-[#111] text-white hover:bg-[#333] transition-colors">
+          className="shine hidden md:block text-sm font-medium px-5 py-2 rounded-full bg-[#111] text-white hover:bg-[#333] hover:scale-105 transition-all">
           Hire Me
         </a>
 
@@ -45,9 +51,9 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden bg-white border-t border-black/10 px-6 py-5 flex flex-col gap-4">
           {links.map((l) => (
-            <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)}
+            <a key={l.label} href={l.href} onClick={() => setOpen(false)}
               className="text-[#555] hover:text-[#111] text-sm font-medium">
-              {l}
+              {l.label}
             </a>
           ))}
           <a href="#contact" onClick={() => setOpen(false)}

@@ -7,7 +7,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 
 export const metadata: Metadata = {
   title: "Psalm David De Dios — Full Stack Developer",
-  description: "Full Stack Website Developer & Software Engineer building high-performance websites, SaaS platforms, and AI-powered solutions.",
+  description: "Full stack developer building POS, inventory, multi-branch and warehouse systems for real businesses. Creator of ADZflow, live at ADZ Garage.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

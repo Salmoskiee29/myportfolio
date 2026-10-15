@@ -2,7 +2,7 @@
 import { useInView } from "@/hooks/useInView";
 
 const experiences = [
-  { title: "Technical Support Engineer", company: "Terra Solar Philippines Inc. · Under Meralco MGEN", dates: "2025 – 2026" },
+  { title: "Technical Support Engineer", company: "Terra Solar Philippines Inc. · Under Meralco MGEN", dates: "2025 – Present" },
   { title: "IT Intern / On-the-Job Trainee", company: "Infopro Business Solutions Inc.", dates: "2024 – 2025" },
   { title: "Software Engineer / Full Stack Developer", company: "Freelance / Self-Employed", dates: "2021 – Present" },
 ];
@@ -30,17 +30,17 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Left — bio */}
           <div className={`reveal delay-2 ${inView ? "visible" : ""} space-y-4 text-[#555] leading-relaxed`}>
-            <p>I&apos;m a Full Stack Website Developer and Software Engineer with over 5 years of experience creating websites, SaaS platforms, automation systems, AI applications, inventory management systems, POS software, and custom business solutions.</p>
-            <p>I enjoy transforming ideas into functional, scalable, and user-friendly applications that help businesses become more efficient and profitable.</p>
-            <p>Whether it&apos;s a corporate website, an eCommerce platform, or a custom management system, my goal is always to deliver software that creates measurable business value.</p>
+            <p>I&apos;m a Full Stack Developer from Nueva Ecija with 5+ years of freelance experience building POS software, inventory and warehouse systems, booking platforms, websites and AI automation for Philippine businesses.</p>
+            <p>I also help run ADZ Garage, a multi-branch tire and 4x4 parts business. That is where ADZflow was built and is used every day, so I design systems from the point of view of the people at the counter, in the warehouse and in the owner&apos;s office.</p>
+            <p>I handle the whole build myself: requirements, database design, front end, deployment, data migration, training and long-term support.</p>
 
             {/* Personal details */}
             <div className="mt-6 pt-6 border-t border-black/8 grid grid-cols-2 gap-y-3 gap-x-4 text-sm">
               {[
-                { label: "Birthday", value: "July 29, 2003" },
-                { label: "Nationality", value: "Filipino" },
+                { label: "Email", value: "salmoskiee@gmail.com" },
                 { label: "Phone", value: "+63 9929598173" },
                 { label: "Location", value: "Palayan City, Nueva Ecija" },
+                { label: "Work setup", value: "Remote / project-based" },
               ].map((d) => (
                 <div key={d.label}>
                   <p className="text-xs text-[#888] font-medium">{d.label}</p>
@@ -54,11 +54,11 @@ export default function About() {
           <div className={`reveal delay-3 ${inView ? "visible" : ""} space-y-4`}>
 
             {/* Experience cards */}
-            <div className="bg-[#EFEFEF] rounded-2xl p-5 border border-black/8 space-y-4">
+            <div className="bg-[#EFEFEF] rounded-2xl p-5 border border-black/8 space-y-4 hover:shadow-md transition-shadow duration-300">
               <p className="text-xs font-bold text-[#888] uppercase tracking-widest">Experience</p>
               {experiences.map((e, i) => (
-                <div key={i} className={`flex items-start gap-3 ${i !== 0 ? "pt-4 border-t border-black/10" : ""}`}>
-                  <div className="w-9 h-9 rounded-xl bg-[#111] flex items-center justify-center shrink-0 mt-0.5">
+                <div key={i} className={`reveal ${inView ? "visible" : ""} group flex items-start gap-3 ${i !== 0 ? "pt-4 border-t border-black/10" : ""}`} style={{ transitionDelay: `${0.35 + i * 0.12}s` }}>
+                  <div className="w-9 h-9 rounded-xl bg-[#111] flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
@@ -73,11 +73,11 @@ export default function About() {
             </div>
 
             {/* Education cards */}
-            <div className="bg-white rounded-2xl p-5 border border-black/10 space-y-4">
+            <div className="bg-white rounded-2xl p-5 border border-black/10 space-y-4 hover:shadow-md transition-shadow duration-300">
               <p className="text-xs font-bold text-[#888] uppercase tracking-widest">Education</p>
               {education.map((e, i) => (
-                <div key={i} className={`flex items-start gap-3 ${i !== 0 ? "pt-4 border-t border-black/8" : ""}`}>
-                  <div className="w-9 h-9 rounded-xl bg-[#111] flex items-center justify-center shrink-0 mt-0.5">
+                <div key={i} className={`reveal ${inView ? "visible" : ""} group flex items-start gap-3 ${i !== 0 ? "pt-4 border-t border-black/8" : ""}`} style={{ transitionDelay: `${0.45 + i * 0.12}s` }}>
+                  <div className="w-9 h-9 rounded-xl bg-[#111] flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l9-5-9-5-9 5 9 5z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l6.16-3.422A12.083 12.083 0 0121 13.5c0 3.314-4.03 6-9 6s-9-2.686-9-6a12.083 12.083 0 012.84-1.922L12 14z" />

@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 
 const phrases = [
   "Full Stack Developer",
-  "Software Engineer",
-  "AI Integration Specialist",
-  "Business Automation Expert",
+  "POS & Inventory Systems",
+  "Multi-Branch Operations",
+  "AI & Business Automation",
 ];
 
 export default function Typewriter() {

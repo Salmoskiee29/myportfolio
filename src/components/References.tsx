@@ -32,15 +32,15 @@ export default function References() {
           {references.map((r, i) => (
             <div
               key={r.name}
-              className={`reveal delay-${i + 1} ${inView ? "visible" : ""} bg-[#EFEFEF] rounded-2xl border border-black/8 p-6 flex items-start gap-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200`}
+              className={`reveal delay-${i + 1} ${inView ? "visible" : ""} bg-[#EFEFEF] rounded-2xl border border-black/8 p-6 flex items-start gap-4 group hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300`}
             >
-              <div className="w-11 h-11 rounded-full bg-[#111] flex items-center justify-center shrink-0">
+              <div className="w-11 h-11 rounded-full bg-[#111] flex items-center justify-center shrink-0 group-hover:rotate-[360deg] transition-transform duration-700">
                 <span className="text-white text-sm font-bold">{r.initials}</span>
               </div>
               <div>
                 <p className="font-bold text-[#111] text-sm">{r.name}</p>
                 <p className="text-xs text-[#666] mt-0.5">{r.company}</p>
-                <a href={`mailto:${r.email}`} className="text-xs text-[#888] mt-1 block hover:text-[#111] transition-colors">
+                <a href={`mailto:${r.email}`} className="link-underline text-xs text-[#888] mt-1 inline-block hover:text-[#111] transition-colors">
                   {r.email}
                 </a>
               </div>
