@@ -1,5 +1,6 @@
 "use client";
 import { useInView } from "@/hooks/useInView";
+import SectionHeader from "./SectionHeader";
 
 const references = [
   {
@@ -20,34 +21,22 @@ export default function References() {
   const { ref, inView } = useInView();
 
   return (
-    <section id="references" className="py-24 bg-white" ref={ref}>
+    <section id="references" className="py-24" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
-
-        <div className={`reveal ${inView ? "visible" : ""} mb-12`}>
-          <p className="text-sm text-[#888] font-medium mb-2">Character References</p>
-          <h2 className="text-4xl sm:text-5xl font-black text-[#111]">References</h2>
-        </div>
+        <SectionHeader n="08" label="references" inView={inView} delay={1.5} title="Character references" />
 
         <div className="grid sm:grid-cols-2 gap-5 max-w-2xl">
           {references.map((r, i) => (
-            <div
-              key={r.name}
-              className={`reveal delay-${i + 1} ${inView ? "visible" : ""} bg-[#EFEFEF] rounded-2xl border border-black/8 p-6 flex items-start gap-4 group hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300`}
-            >
-              <div className="w-11 h-11 rounded-full bg-[#111] flex items-center justify-center shrink-0 group-hover:rotate-[360deg] transition-transform duration-700">
-                <span className="text-white text-sm font-bold">{r.initials}</span>
-              </div>
-              <div>
-                <p className="font-bold text-[#111] text-sm">{r.name}</p>
-                <p className="text-xs text-[#666] mt-0.5">{r.company}</p>
-                <a href={`mailto:${r.email}`} className="link-underline text-xs text-[#888] mt-1 inline-block hover:text-[#111] transition-colors">
-                  {r.email}
-                </a>
+            <div key={r.name} className={`reveal delay-${i + 1} ${inView ? "visible" : ""} node node-hover p-6 flex items-start gap-4`}>
+              <span aria-hidden="true" className="w-11 h-11 rounded-full bg-[var(--panel-2)] border border-[var(--line)] flex items-center justify-center shrink-0 text-[var(--glow)] text-sm font-bold">{r.initials}</span>
+              <div className="min-w-0">
+                <p className="font-bold text-white text-sm">{r.name}</p>
+                <p className="text-xs text-[var(--muted)] mt-0.5">{r.company}</p>
+                <a href={`mailto:${r.email}`} className="link-underline text-xs text-[var(--glow)] mt-1 inline-block break-all">{r.email}</a>
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

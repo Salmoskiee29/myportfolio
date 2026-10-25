@@ -1,5 +1,6 @@
 "use client";
 import { useInView } from "@/hooks/useInView";
+import SectionHeader from "./SectionHeader";
 
 type Project = { title: string; category: string; description: string; features: string[]; href?: string };
 
@@ -18,40 +19,41 @@ export default function Projects() {
   const { ref, inView } = useInView();
 
   return (
-    <section id="projects" className="py-24 bg-white" ref={ref}>
+    <section id="projects" className="py-24" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
-
-        <div className={`reveal ${inView ? "visible" : ""} mb-12`}>
-          <p className="text-sm text-[#888] font-medium mb-2">Portfolio</p>
-          <h2 className="text-4xl sm:text-5xl font-black text-[#111]">More Projects</h2>
-        </div>
+        <SectionHeader n="03" label="projects" inView={inView} delay={1.2} title="More projects" />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {projects.map((p, i) => (
-            <div
-              key={p.title}
-              className={`reveal delay-${Math.min(i % 3 + 1, 6)} ${inView ? "visible" : ""} group cursor-default`}
-            >
-              <a href={p.href} className={`tilt h-full rounded-2xl border p-6 flex flex-col gap-4 hover:shadow-xl ${p.href ? "bg-[#111] border-[#111] text-white cursor-pointer" : "bg-[#EFEFEF] border-black/8 pointer-events-none"}`}>
-              <div>
-                <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-white border border-black/10 text-[#555] mb-3 group-hover:bg-[#111] group-hover:text-white group-hover:border-[#111] transition-colors duration-300">
-                  {p.category}
-                </span>
-                <h3 className={`font-bold text-base mb-2 flex items-center justify-between gap-2 ${p.href ? "text-white" : "text-[#111]"}`}>{p.title}<span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">↗</span></h3>
-                <p className={`text-sm leading-relaxed ${p.href ? "text-white/70" : "text-[#666]"}`}>{p.description}</p>
+          {projects.map((p, i) => {
+            const featured = Boolean(p.href);
+            const Card: React.ElementType = featured ? "a" : "div";
+            return (
+              <div key={p.title} className={`reveal delay-${Math.min((i % 3) + 1, 6)} ${inView ? "visible" : ""} group`}>
+                <Card
+                  {...(featured ? { href: p.href } : {})}
+                  className={`node tilt h-full p-6 flex flex-col gap-4 ${featured ? "border-[var(--glow)] shadow-[0_0_0_4px_var(--halo)]" : ""}`}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="chip">{p.category}</span>
+                    <span aria-hidden="true" className={`w-2.5 h-2.5 rounded-full ${featured ? "bg-[var(--ok)] pulse" : "bg-[var(--wire)]"}`} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-base text-white mb-2 flex items-center justify-between gap-2">
+                      {p.title}
+                      {featured && <span className="text-[var(--glow)] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-[var(--muted)]">{p.description}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {p.features.map((f) => (
+                      <span key={f} className="font-mono text-[11px] px-2 py-0.5 rounded-md bg-[var(--bg)] border border-[var(--line)] text-[var(--muted)]">{f}</span>
+                    ))}
+                  </div>
+                </Card>
               </div>
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {p.features.map((f) => (
-                  <span key={f} className={`text-[11px] px-2.5 py-1 rounded-full border ${p.href ? "bg-white/10 text-white/80 border-white/15" : "bg-white text-[#666] border-black/8"}`}>
-                    {f}
-                  </span>
-                ))}
-              </div>
-              </a>
-            </div>
-          ))}
+            );
+          })}
         </div>
-
       </div>
     </section>
   );

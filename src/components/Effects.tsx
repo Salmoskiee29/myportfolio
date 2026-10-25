@@ -46,7 +46,7 @@ export default function Effects() {
   return (
     <div
       ref={barRef}
-      className="fixed top-0 left-0 right-0 h-[3px] z-[60] origin-left bg-[#111]"
+      className="fixed top-0 left-0 right-0 h-[3px] z-[60] origin-left bg-[var(--glow)]"
       style={{ transform: "scaleX(0)" }}
     />
   );

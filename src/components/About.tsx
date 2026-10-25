@@ -1,5 +1,6 @@
 "use client";
 import { useInView } from "@/hooks/useInView";
+import SectionHeader from "./SectionHeader";
 
 const experiences = [
   { title: "Technical Support Engineer", company: "Terra Solar Philippines Inc. · Under Meralco MGEN", dates: "2025 – Present" },
@@ -14,84 +15,80 @@ const education = [
   { school: "Faith Walkers International Christian Academy", level: "Elementary", dates: "2009 – 2015" },
 ];
 
+const details = [
+  { label: "Email", value: "salmoskiee@gmail.com" },
+  { label: "Phone", value: "+63 9929598173" },
+  { label: "Location", value: "Palayan City, Nueva Ecija" },
+  { label: "Work setup", value: "Remote / project-based" },
+];
+
+function Timeline({ items, inView, base }: { items: { a: string; b: string; c: string }[]; inView: boolean; base: number }) {
+  return (
+    <ol className="flex flex-col">
+      {items.map((it, i) => (
+        <li key={it.a} className={`reveal ${inView ? "visible" : ""} flex gap-4`} style={{ transitionDelay: `${base + i * 0.1}s` }}>
+          <div className="flex flex-col items-center pt-1.5" aria-hidden="true">
+            <span className="w-3 h-3 rounded-full border-2 border-[var(--glow)] bg-[var(--bg)]" />
+            {i < items.length - 1 && <span className="wire w-0.5 flex-1 my-1"><span className="dot v slow" style={{ animationDelay: `${i * 0.7}s` }} /></span>}
+          </div>
+          <div className="pb-5">
+            <p className="font-bold text-sm text-white leading-tight">{it.a}</p>
+            <p className="text-xs text-[var(--muted)] mt-1">{it.b}</p>
+            <p className="font-mono text-[11px] text-[var(--dim)] mt-1">{it.c}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 export default function About() {
   const { ref, inView } = useInView();
 
   return (
-    <section id="about" className="py-24 bg-white" ref={ref}>
+    <section id="about" className="py-24" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
-        <div className={`reveal ${inView ? "visible" : ""} mb-12`}>
-          <p className="text-sm text-[#888] font-medium mb-2">About Me</p>
-          <h2 className="text-4xl sm:text-5xl font-black text-[#111] leading-tight">
-            Software Engineer passionate<br />about building <span className="italic font-black">real solutions</span>
-          </h2>
-        </div>
+        <SectionHeader
+          n="01" label="about" inView={inView}
+          title={<>Software engineer who builds <span className="text-[var(--glow)]">real solutions</span></>}
+        />
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Left — bio */}
-          <div className={`reveal delay-2 ${inView ? "visible" : ""} space-y-4 text-[#555] leading-relaxed`}>
-            <p>I&apos;m a Full Stack Developer from Nueva Ecija with 5+ years of freelance experience building POS software, inventory and warehouse systems, booking platforms, websites and AI automation for Philippine businesses.</p>
-            <p>I also help run ADZ Garage, a multi-branch tire and 4x4 parts business. That is where ADZflow was built and is used every day, so I design systems from the point of view of the people at the counter, in the warehouse and in the owner&apos;s office.</p>
-            <p>I handle the whole build myself: requirements, database design, front end, deployment, data migration, training and long-term support.</p>
-
-            {/* Personal details */}
-            <div className="mt-6 pt-6 border-t border-black/8 grid grid-cols-2 gap-y-3 gap-x-4 text-sm">
-              {[
-                { label: "Email", value: "salmoskiee@gmail.com" },
-                { label: "Phone", value: "+63 9929598173" },
-                { label: "Location", value: "Palayan City, Nueva Ecija" },
-                { label: "Work setup", value: "Remote / project-based" },
-              ].map((d) => (
+        <div className="grid md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-8 items-start">
+          {/* Left — photo + bio */}
+          <div className={`reveal delay-2 ${inView ? "visible" : ""} node p-6 flex flex-col gap-6`}>
+            <div className="flex items-center gap-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/profile.jpg" alt="Psalm David De Dios" className="w-20 h-20 rounded-2xl object-cover object-top border border-[var(--line)]" />
+              <div>
+                <p className="font-extrabold text-white text-lg">Psalm David De Dios</p>
+                <p className="text-sm text-[var(--muted)]">Software Engineer · full-stack · automation</p>
+              </div>
+            </div>
+            <div className="space-y-4 text-[var(--muted)] leading-relaxed text-[15px]">
+              <p>I&apos;m a Full Stack Developer from Nueva Ecija with 5+ years of freelance experience building POS software, inventory and warehouse systems, booking platforms, websites and AI automation for Philippine businesses.</p>
+              <p>I also help run ADZ Garage, a multi-branch tire and 4x4 parts business. That is where ADZflow was built and is used every day, so I design systems from the point of view of the people at the counter, in the warehouse and in the owner&apos;s office.</p>
+              <p>I handle the whole build myself: requirements, database design, front end, deployment, data migration, training and long-term support.</p>
+            </div>
+            <div className="pt-5 border-t border-[var(--line)] grid grid-cols-2 gap-y-4 gap-x-4 text-sm">
+              {details.map((d) => (
                 <div key={d.label}>
-                  <p className="text-xs text-[#888] font-medium">{d.label}</p>
-                  <p className="text-[#111] font-semibold">{d.value}</p>
+                  <p className="font-mono text-[11px] text-[var(--dim)]">{d.label}</p>
+                  <p className="text-white font-semibold break-words">{d.value}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Right — experience + education */}
-          <div className={`reveal delay-3 ${inView ? "visible" : ""} space-y-4`}>
-
-            {/* Experience cards */}
-            <div className="bg-[#EFEFEF] rounded-2xl p-5 border border-black/8 space-y-4 hover:shadow-md transition-shadow duration-300">
-              <p className="text-xs font-bold text-[#888] uppercase tracking-widest">Experience</p>
-              {experiences.map((e, i) => (
-                <div key={i} className={`reveal ${inView ? "visible" : ""} group flex items-start gap-3 ${i !== 0 ? "pt-4 border-t border-black/10" : ""}`} style={{ transitionDelay: `${0.35 + i * 0.12}s` }}>
-                  <div className="w-9 h-9 rounded-xl bg-[#111] flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-bold text-sm text-[#111] leading-tight">{e.title}</p>
-                    <p className="text-xs text-[#666] mt-0.5">{e.company}</p>
-                    <p className="text-xs text-[#888] mt-0.5">{e.dates}</p>
-                  </div>
-                </div>
-              ))}
+          <div className="flex flex-col gap-6">
+            <div className={`reveal delay-3 ${inView ? "visible" : ""} node p-6`}>
+              <p className="font-mono text-xs text-[var(--muted)] mb-5">experience.log</p>
+              <Timeline inView={inView} base={0.35} items={experiences.map((e) => ({ a: e.title, b: e.company, c: e.dates }))} />
             </div>
-
-            {/* Education cards */}
-            <div className="bg-white rounded-2xl p-5 border border-black/10 space-y-4 hover:shadow-md transition-shadow duration-300">
-              <p className="text-xs font-bold text-[#888] uppercase tracking-widest">Education</p>
-              {education.map((e, i) => (
-                <div key={i} className={`reveal ${inView ? "visible" : ""} group flex items-start gap-3 ${i !== 0 ? "pt-4 border-t border-black/8" : ""}`} style={{ transitionDelay: `${0.45 + i * 0.12}s` }}>
-                  <div className="w-9 h-9 rounded-xl bg-[#111] flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l9-5-9-5-9 5 9 5z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l6.16-3.422A12.083 12.083 0 0121 13.5c0 3.314-4.03 6-9 6s-9-2.686-9-6a12.083 12.083 0 012.84-1.922L12 14z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-bold text-sm text-[#111] leading-tight">{e.school}</p>
-                    <p className="text-xs text-[#666] mt-0.5">{e.level}</p>
-                    <p className="text-xs text-[#888] mt-0.5">{e.dates}</p>
-                  </div>
-                </div>
-              ))}
+            <div className={`reveal delay-4 ${inView ? "visible" : ""} node p-6`}>
+              <p className="font-mono text-xs text-[var(--muted)] mb-5">education.log</p>
+              <Timeline inView={inView} base={0.45} items={education.map((e) => ({ a: e.school, b: e.level, c: e.dates }))} />
             </div>
-
           </div>
         </div>
       </div>

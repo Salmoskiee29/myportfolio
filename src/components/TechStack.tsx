@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useInView } from "@/hooks/useInView";
+import SectionHeader from "./SectionHeader";
 
 const allTools = [
   // Frontend
@@ -62,24 +63,22 @@ export default function TechStack() {
   const visible = active === "all" ? allTools : allTools.filter((t) => t.cat === active);
 
   return (
-    <section id="tools" className="py-24 bg-[#EFEFEF]" ref={ref}>
+    <section id="tools" className="py-24" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
-
-        <div className={`reveal ${inView ? "visible" : ""} mb-10`}>
-          <p className="text-sm text-[#888] font-medium mb-2">Skills</p>
-          <h2 className="text-4xl sm:text-5xl font-black text-[#111]">Tools & Tech Stack</h2>
-        </div>
+        <SectionHeader n="05" label="stack" inView={inView} delay={2.4} title="Tools & tech stack" />
 
         {/* Filter tabs */}
-        <div className={`reveal delay-1 ${inView ? "visible" : ""} flex flex-wrap gap-2 mb-10`}>
+        <div className={`reveal delay-1 ${inView ? "visible" : ""} flex flex-wrap gap-2 mb-10`} role="group" aria-label="Filter tools">
           {filters.map((f) => (
             <button
               key={f.key}
+              type="button"
+              aria-pressed={active === f.key}
               onClick={() => setActive(f.key)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+              className={`min-h-11 px-4 py-2 rounded-full text-sm font-semibold transition-all ${
                 active === f.key
-                  ? "bg-[#111] text-white scale-105"
-                  : "bg-white text-[#555] border border-black/10 hover:border-black/30 hover:text-[#111]"
+                  ? "bg-[var(--glow)] text-[#121318]"
+                  : "bg-[var(--panel)] text-[var(--muted)] border border-[var(--line)] hover:border-[var(--glow)] hover:text-white"
               }`}
             >
               {f.label}
@@ -92,23 +91,22 @@ export default function TechStack() {
           {visible.map((tool, i) => (
             <div
               key={tool.name}
-              className={`${inView ? "pop-in" : ""} bg-white rounded-2xl border border-black/8 p-4 flex flex-col items-center gap-2.5 hover:shadow-md hover:-translate-y-1 transition-all duration-200 cursor-default group`}
+              className={`${inView ? "pop-in" : ""} node node-hover rounded-2xl p-4 flex flex-col items-center gap-2.5 cursor-default group`}
               style={{ animationDelay: `${0.15 + i * 0.025}s` }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`https://cdn.simpleicons.org/${tool.icon}`}
-                alt={tool.name}
-                width={32}
-                height={32}
-                className="opacity-80 group-hover:opacity-100 group-hover:scale-125 group-hover:-rotate-6 transition-all duration-300"
+                src={`https://cdn.simpleicons.org/${tool.icon}/c9ccd6`}
+                alt=""
+                width={30}
+                height={30}
+                className="opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
               />
-              <span className="text-[11px] text-[#666] text-center font-medium leading-tight">{tool.name}</span>
+              <span className="text-[11px] text-[var(--muted)] group-hover:text-white text-center font-semibold leading-tight">{tool.name}</span>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

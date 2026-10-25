@@ -1,50 +1,51 @@
 "use client";
 import { useInView } from "@/hooks/useInView";
+import SectionHeader from "./SectionHeader";
+
+const info = [
+  { label: "Email", value: "salmoskiee@gmail.com", href: "mailto:salmoskiee@gmail.com", icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" },
+  { label: "Phone", value: "+63 9929598173", href: "tel:+639929598173", icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.5a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z" },
+  { label: "Location", value: "Palayan City, Nueva Ecija", icon: "M17.66 16.66L13.41 20.9a2 2 0 01-2.83 0l-4.24-4.24a8 8 0 1111.32 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z" },
+  { label: "Status", value: "Available for projects", icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" },
+];
 
 export default function Contact() {
   const { ref, inView } = useInView();
 
   return (
-    <section id="contact" className="py-24 bg-[#EFEFEF]" ref={ref}>
+    <section id="contact" className="py-24" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
+        <SectionHeader
+          n="07" label="output" inView={inView} delay={0.9}
+          title={<>Let&apos;s build something<br /><span className="text-[var(--glow)]">that runs on its own</span></>}
+        />
 
-        <div className={`reveal ${inView ? "visible" : ""} mb-12`}>
-          <p className="text-sm text-[#888] font-medium mb-2">Get In Touch</p>
-          <h2 className="text-4xl sm:text-5xl font-black text-[#111]">
-            Let&apos;s Build Something<br />
-            <span className="italic">Amazing Together</span>
-          </h2>
+        <div className={`reveal delay-1 ${inView ? "visible" : ""} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8`}>
+          {info.map((item) => {
+            const Tag: React.ElementType = item.href ? "a" : "div";
+            return (
+              <Tag key={item.label} {...(item.href ? { href: item.href } : {})} className="node node-hover p-5 flex items-start gap-3">
+                <span aria-hidden="true" className="w-10 h-10 shrink-0 rounded-xl bg-[var(--panel-2)] border border-[var(--line)] flex items-center justify-center">
+                  <svg className="w-5 h-5 text-[var(--glow)]" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d={item.icon} /></svg>
+                </span>
+                <span className="min-w-0">
+                  <span className="block font-mono text-[11px] text-[var(--dim)]">{item.label}</span>
+                  <span className="block text-sm text-white font-semibold break-words">{item.value}</span>
+                </span>
+              </Tag>
+            );
+          })}
         </div>
 
-        {/* Info card — top */}
-        <div className={`reveal delay-1 ${inView ? "visible" : ""} bg-white rounded-2xl border border-black/8 shadow-sm mb-8`}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-black/8">
-            {[
-              { label: "Email",       value: "salmoskiee@gmail.com",                          icon: "📧" },
-              { label: "Phone",       value: "+63 9929598173",                                icon: "📱" },
-              { label: "Location",    value: "Palayan City, Nueva Ecija",                     icon: "📍" },
-              { label: "Status",      value: "Available for projects",                        icon: "💼" },
-            ].map((item, i) => (
-              <div key={item.label} className={`reveal ${inView ? "visible" : ""} group flex flex-col items-center text-center gap-1 px-4 py-5 hover:bg-[#F7F7F7] transition-colors cursor-default`} style={{ transitionDelay: `${0.2 + i * 0.07}s` }}>
-                <span className="wiggle inline-block text-2xl mb-1">{item.icon}</span>
-                <p className="text-xs text-[#888] font-medium">{item.label}</p>
-                <p className="text-xs text-[#111] font-semibold leading-snug">{item.value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className={`reveal delay-2 ${inView ? "visible" : ""} flex flex-col sm:flex-row items-start sm:items-center gap-6`}>
-          <p className="text-[#555] text-base leading-relaxed max-w-lg">
+        <div className={`reveal delay-2 ${inView ? "visible" : ""} node run p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 justify-between`}>
+          <p className="text-[var(--muted)] text-base leading-relaxed max-w-lg">
             Need a POS, inventory or multi-branch system? Send me how your operation works today and I&apos;ll reply with a phased plan, timeline and estimate.
           </p>
-          <a href="mailto:salmoskiee@gmail.com"
-            className="shine group shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#111] text-white text-sm font-semibold hover:bg-[#333] hover:scale-105 transition-all">
-            Send Me an Email <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          <a href="mailto:salmoskiee@gmail.com" className="shine group shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[var(--glow)] text-[#121318] text-sm font-extrabold hover:brightness-110 transition">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z" /></svg>
+            Execute: send me an email
           </a>
         </div>
-
       </div>
     </section>
   );

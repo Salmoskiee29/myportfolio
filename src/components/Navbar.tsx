@@ -15,32 +15,35 @@ export default function Navbar() {
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", fn);
+    fn();
+    window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
   return (
-    <nav className={`fade-up-1 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent"}`}>
+    <nav className={`fade-up-1 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || open ? "bg-[#121318]/85 backdrop-blur-md border-b border-[var(--line)]" : "bg-transparent border-b border-transparent"}`}>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <span className="text-xl font-bold text-[#111]">Psalm</span>
+        <a href="#home" className="flex items-center gap-2 font-mono font-bold text-white">
+          <span className="w-2 h-2 rounded-full bg-[var(--ok)] pulse" aria-hidden="true" />
+          psalm<span className="text-[var(--muted)]">.workflow</span>
+        </a>
 
         <ul className="hidden md:flex items-center gap-8">
           {links.map((l) => (
             <li key={l.label}>
-              <a href={l.href} className="link-underline text-[#555] hover:text-[#111] text-sm font-medium transition-colors">
+              <a href={l.href} className="link-underline text-[var(--muted)] hover:text-white text-sm font-semibold transition-colors">
                 {l.label}
               </a>
             </li>
           ))}
         </ul>
 
-        <a href="#contact"
-          className="shine hidden md:block text-sm font-medium px-5 py-2 rounded-full bg-[#111] text-white hover:bg-[#333] hover:scale-105 transition-all">
+        <a href="#contact" className="shine hidden md:block text-sm font-extrabold px-5 py-2 rounded-full bg-[var(--glow)] text-[#121318] hover:brightness-110 transition">
           Hire Me
         </a>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden text-[#111]">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button type="button" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} className="md:hidden text-white w-11 h-11 flex items-center justify-center">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             {open
               ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />}
@@ -49,15 +52,13 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden bg-white border-t border-black/10 px-6 py-5 flex flex-col gap-4">
+        <div className="md:hidden border-t border-[var(--line)] px-6 py-5 flex flex-col gap-4">
           {links.map((l) => (
-            <a key={l.label} href={l.href} onClick={() => setOpen(false)}
-              className="text-[#555] hover:text-[#111] text-sm font-medium">
+            <a key={l.label} href={l.href} onClick={() => setOpen(false)} className="text-[var(--muted)] hover:text-white text-sm font-semibold">
               {l.label}
             </a>
           ))}
-          <a href="#contact" onClick={() => setOpen(false)}
-            className="text-sm font-medium px-5 py-2.5 rounded-full bg-[#111] text-white text-center">
+          <a href="#contact" onClick={() => setOpen(false)} className="text-sm font-extrabold px-5 py-2.5 rounded-full bg-[var(--glow)] text-[#121318] text-center">
             Hire Me
           </a>
         </div>

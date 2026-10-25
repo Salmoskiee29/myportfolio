@@ -1,8 +1,24 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-jakarta);
+  --font-mono: var(--font-jetbrains);
+}
+
+/* ── Dark node-canvas palette ──────────────────────────── */
+:root {
+  --bg: #121318;
+  --panel: #1b1d24;
+  --panel-2: #22252d;
+  --line: #30333c;
+  --wire: #3a3d49;
+  --text: #ececf1;
+  --muted: #a3a6b2;
+  --dim: #7d808c;
+  --glow: #a5a0ff;
+  --halo: rgba(165, 160, 255, 0.32);
+  --ok: #4ade80;
+  --cycle: 3.6s;
 }
 
 @layer base {
@@ -11,25 +27,84 @@
   html, body {
     max-width: 100%;
     overflow-x: hidden;
-    background: #EFEFEF;
-    color: #111111;
+    background: var(--bg);
+    color: var(--text);
     font-family: var(--font-sans), sans-serif;
   }
+  ::selection { background: var(--glow); color: var(--bg); }
 }
 
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
+/* Dot-grid canvas background */
+.dotgrid {
+  background-color: var(--bg);
+  background-image: radial-gradient(#272a34 1.3px, transparent 1.3px);
+  background-size: 22px 22px;
 }
 
+/* ── Nodes ─────────────────────────────────────────────── */
+.node {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+.node-hover:hover {
+  border-color: var(--glow);
+  box-shadow: 0 0 0 4px var(--halo), 0 0 28px 2px var(--halo);
+  transform: translateY(-3px);
+}
+.node-pill {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .35rem .85rem; border-radius: 999px;
+  background: var(--panel); border: 1px solid var(--line);
+  font-family: var(--font-mono), monospace; font-size: .75rem; color: var(--muted);
+}
+.chip {
+  display: inline-flex; align-items: center;
+  padding: .3rem .7rem; border-radius: 999px;
+  background: var(--panel-2); border: 1px solid var(--line);
+  font-size: .72rem; color: var(--muted);
+}
+
+/* ── Wires + traveling light ───────────────────────────── */
+.wire { position: relative; background: var(--wire); }
+.dot {
+  position: absolute; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--glow);
+  box-shadow: 0 0 10px 3px var(--glow), 0 0 22px 6px var(--halo);
+  opacity: 0;
+  animation-duration: var(--cycle);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+.dot.v { left: -3px; top: -8px; animation-name: travelV; }
+.dot.h { top: -3px; left: -8px; animation-name: travelH; }
+.dot.l { top: -3px; left: 50%; animation-name: travelL; }
+.dot.r { top: -3px; left: 50%; animation-name: travelR; }
+.dot.slow { animation-duration: 2.8s; animation-name: travelVSlow; }
+
+@keyframes travelV { 0% { top: -8px; opacity: 0 } 1% { opacity: 1 } 11% { top: 100%; opacity: 1 } 13% { top: 100%; opacity: 0 } 100% { opacity: 0 } }
+@keyframes travelH { 0% { left: -8px; opacity: 0 } 1% { opacity: 1 } 11% { left: 100%; opacity: 1 } 13% { left: 100%; opacity: 0 } 100% { opacity: 0 } }
+@keyframes travelL { 0% { left: 50%; opacity: 0 } 1% { opacity: 1 } 11% { left: 16.6%; opacity: 1 } 13% { left: 16.6%; opacity: 0 } 100% { opacity: 0 } }
+@keyframes travelR { 0% { left: 50%; opacity: 0 } 1% { opacity: 1 } 11% { left: 83.3%; opacity: 1 } 13% { left: 83.3%; opacity: 0 } 100% { opacity: 0 } }
+@keyframes travelVSlow { 0% { top: -8px; opacity: 0 } 5% { opacity: 1 } 60% { top: 100%; opacity: 1 } 66% { top: 100%; opacity: 0 } 100% { opacity: 0 } }
+
+/* Node lights up when the light arrives */
+.run { animation: nodeGlow var(--cycle) ease-out infinite; }
+@keyframes nodeGlow {
+  0%   { border-color: var(--line); box-shadow: 0 0 0 0 transparent; }
+  4%   { border-color: var(--glow); box-shadow: 0 0 0 4px var(--halo), 0 0 28px 2px var(--halo); }
+  22%  { border-color: var(--line); box-shadow: 0 0 0 0 transparent; }
+  100% { border-color: var(--line); }
+}
+.badge { animation: pop var(--cycle) ease-out infinite; }
+@keyframes pop { 0% { transform: scale(.4); opacity: .2 } 5% { transform: scale(1.15); opacity: 1 } 9% { transform: scale(1) } 100% { transform: scale(1); opacity: 1 } }
+.pulse { animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1 } 50% { opacity: .35 } }
+
+/* ── Entrance + scroll reveal ──────────────────────────── */
+@keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 .fade-up-1 { animation: fade-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
 .fade-up-2 { animation: fade-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s both; }
 .fade-up-3 { animation: fade-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
@@ -37,16 +112,11 @@
 .fade-up-5 { animation: fade-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.52s both; }
 .fade-in-1 { animation: fade-in 0.6s ease 0.6s both; }
 
-.cursor-blink { animation: blink 1s step-end infinite; }
-
-/* scroll reveal */
 .reveal {
   opacity: 0;
   transform: translateY(32px) scale(0.98);
   filter: blur(6px);
-  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
-              transform 0.8s cubic-bezier(0.16,1,0.3,1),
-              filter 0.8s cubic-bezier(0.16,1,0.3,1);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1), filter 0.8s cubic-bezier(0.16,1,0.3,1);
 }
 .reveal.visible { opacity: 1; transform: none; filter: none; }
 .delay-1 { transition-delay: 0.08s; }
@@ -56,84 +126,39 @@
 .delay-5 { transition-delay: 0.40s; }
 .delay-6 { transition-delay: 0.48s; }
 
-/* ── Hero name: letters rise in one by one ─────────────── */
 .letter {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(0.5em) rotate(6deg);
-  filter: blur(6px);
+  display: inline-block; opacity: 0;
+  transform: translateY(0.5em) rotate(6deg); filter: blur(6px);
   animation: letter-in 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
 }
 @keyframes letter-in { to { opacity: 1; transform: none; filter: none; } }
-.letter:hover { animation: letter-bounce 0.5s ease; opacity: 1; filter: none; }
-@keyframes letter-bounce {
-  0%, 100% { transform: none; }
-  40% { transform: translateY(-0.12em) scaleY(1.05); }
-}
 
-/* ── Gentle float for the photo ────────────────────────── */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
-}
-.float { animation: float 6s ease-in-out infinite; }
+@keyframes pop-in { from { opacity: 0; transform: scale(0.7) translateY(12px); } to { opacity: 1; transform: none; } }
+.pop-in { animation: pop-in 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
 
-/* ── Ping ring on the "open to opportunities" dot ──────── */
-.pulse-dot { position: relative; }
-.pulse-dot::after {
-  content: ""; position: absolute; inset: 0; border-radius: 9999px;
-  background: inherit; animation: ping 1.6s cubic-bezier(0,0,0.2,1) infinite;
-}
-@keyframes ping { 75%, 100% { transform: scale(2.6); opacity: 0; } }
-
-/* ── Light sweep across buttons on hover ───────────────── */
+/* Light sweep across buttons */
 .shine { position: relative; overflow: hidden; }
 .shine::after {
-  content: ""; position: absolute; top: 0; left: -120%;
-  width: 60%; height: 100%;
-  background: linear-gradient(110deg, transparent, rgba(255,255,255,0.35), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.7s ease;
+  content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+  background: linear-gradient(110deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: skewX(-20deg); transition: left 0.7s ease;
 }
 .shine:hover::after { left: 160%; }
 
-/* ── Underline that grows from the left ────────────────── */
 .link-underline { position: relative; }
 .link-underline::after {
-  content: ""; position: absolute; left: 0; bottom: -4px;
-  width: 100%; height: 1.5px; background: #111;
-  transform: scaleX(0); transform-origin: right;
+  content: ""; position: absolute; left: 0; bottom: -4px; width: 100%; height: 1.5px;
+  background: currentColor; transform: scaleX(0); transform-origin: right;
   transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
 }
 .link-underline:hover::after { transform: scaleX(1); transform-origin: left; }
 
-/* ── Tech tile pop when the filter changes ─────────────── */
-@keyframes pop-in {
-  from { opacity: 0; transform: scale(0.7) translateY(12px); }
-  to   { opacity: 1; transform: none; }
-}
-.pop-in { animation: pop-in 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
-
-/* ── Mouse-follow 3D tilt (driven by Effects.tsx) ──────── */
+/* Mouse-follow tilt (Effects.tsx) */
 .tilt {
   transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
-.tilt:hover { transition-duration: 0.1s, 0.3s; }
-
-/* ── Wiggle for emoji/icons ────────────────────────────── */
-@keyframes wiggle {
-  0%, 100% { transform: rotate(0); }
-  25% { transform: rotate(-12deg) scale(1.15); }
-  75% { transform: rotate(10deg) scale(1.15); }
-}
-.group:hover .wiggle { animation: wiggle 0.6s ease; }
-
-/* ── Infinite marquee ──────────────────────────────────── */
-.marquee { display: flex; gap: 2.5rem; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-.marquee-track { display: flex; flex-shrink: 0; gap: 2.5rem; min-width: 100%; animation: marquee 35s linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
-@keyframes marquee { to { transform: translateX(calc(-100% - 2.5rem)); } }
+.tilt:hover { transition-duration: 0.1s, 0.3s, 0.3s; border-color: var(--glow); box-shadow: 0 0 0 4px var(--halo); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -141,5 +166,9 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .dot { display: none; }
   .reveal, .letter { opacity: 1; transform: none; filter: none; }
 }
+
+/* A running node pauses its glow loop while hovered so the hover state shows */
+.run.node-hover:hover { animation: none; }
