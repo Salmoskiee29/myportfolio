@@ -6,7 +6,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Psalm David De Dios — Full Stack Developer",
+  title: "Psalm David De Dios — Software Engineer · Full-Stack · Automation",
   description: "Full stack developer building POS, inventory, multi-branch and warehouse systems for real businesses. Creator of ADZflow, live at ADZ Garage.",
 };
 

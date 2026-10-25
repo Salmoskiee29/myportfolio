@@ -25,6 +25,10 @@ export default function Hero() {
               ))}
             </h1>
 
+            <p className="fade-up-4 text-xl sm:text-2xl font-semibold text-[#111] tracking-tight mb-2">
+              Software Engineer <span className="text-black/30">·</span> full-stack <span className="text-black/30">·</span> automation
+            </p>
+
             <p className="fade-up-4 text-lg text-[#333] font-medium mb-5 h-7">
               <Typewriter />
             </p>
