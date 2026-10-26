@@ -17,7 +17,7 @@ export default function AdzflowPage() {
       <Navbar />
       <main className="pt-16">
         <div className="max-w-6xl mx-auto px-6 pt-10">
-          <Link href="/#projects" className="node-pill hover:text-white transition-colors">← back to projects</Link>
+          <Link href="/projects" className="node-pill hover:text-white transition-colors">← back to projects</Link>
         </div>
         <CaseStudy />
       </main>
