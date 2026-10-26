@@ -39,7 +39,7 @@ export default function Contact() {
 
         <div className={`reveal delay-2 ${inView ? "visible" : ""} node run p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 justify-between`}>
           <p className="text-[var(--muted)] text-base leading-relaxed max-w-lg">
-            Need a POS, inventory or multi-branch system? Send me how your operation works today and I&apos;ll reply with a phased plan, timeline and estimate.
+            Still running part of your business on paper, Excel or chat? Tell me how it works today and I&apos;ll reply with a phased plan, timeline and estimate.
           </p>
           <a href="mailto:salmoskiee@gmail.com" className="shine group shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[var(--glow)] text-[#121318] text-sm font-extrabold hover:brightness-110 transition">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z" /></svg>

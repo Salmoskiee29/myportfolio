@@ -61,8 +61,7 @@ export default function About() {
               <p className="text-sm text-[var(--muted)]">Software Engineer · full-stack · automation</p>
             </div>
             <div className="space-y-4 text-[var(--muted)] leading-relaxed text-[15px]">
-              <p>I&apos;m a Full Stack Developer from Nueva Ecija with 5+ years of freelance experience building POS software, inventory and warehouse systems, booking platforms, websites and AI automation for Philippine businesses.</p>
-              <p>I also help run ADZ Garage, a multi-branch tire and 4x4 parts business. That is where ADZflow was built and is used every day, so I design systems from the point of view of the people at the counter, in the warehouse and in the owner&apos;s office.</p>
+              <p>I build scalable web applications and intelligent business solutions that turn complex problems into practical results. By combining full-stack development with AI automation, I streamline workflows, improve efficiency, and create secure, high-performance digital experiences. I focus on building technology that doesn’t just work it makes a real impact.</p>
               <p>I handle the whole build myself: requirements, database design, front end, deployment, data migration, training and long-term support.</p>
             </div>
             <div className="pt-5 border-t border-[var(--line)] grid grid-cols-2 gap-y-4 gap-x-4 text-sm">

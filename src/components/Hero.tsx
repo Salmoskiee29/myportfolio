@@ -8,9 +8,9 @@ const steps = [
 ];
 
 const outputs = [
-  { title: "ADZflow", note: "live · 3 branches", href: "/adzflow" },
-  { title: "CFS Jewelry", note: "live selling", href: "#projects" },
-  { title: "Meralco MGEN", note: "room booking", href: "#projects" },
+  { title: "Business systems", note: "POS · inventory · ERP", href: "#projects" },
+  { title: "Web apps", note: "sites · booking · platforms", href: "#projects" },
+  { title: "Automations", note: "AI agents · n8n flows", href: "#projects" },
 ];
 
 function Check({ delay }: { delay: number }) {
@@ -63,8 +63,8 @@ export default function Hero() {
           </p>
 
           <p className="fade-up-4 text-[var(--muted)] text-base leading-relaxed max-w-md">
-            I connect the pieces of a business — counter, warehouse, chat, sheets — into one system that runs on its own.
-            My latest, <strong className="text-white">ADZflow</strong>, runs daily across ADZ Garage&apos;s three branches.
+            I design, build and automate the software a business runs on — from the database to the screens your staff
+            use every day, plus the <strong className="text-white">AI workflows</strong> that take the busywork off their hands.
           </p>
 
           <div className="fade-up-5 flex flex-wrap gap-3 mt-2">
@@ -74,8 +74,8 @@ export default function Hero() {
               </a>
             </Magnetic>
             <Magnetic>
-              <Link href="/adzflow" className="block px-6 py-3.5 rounded-full bg-[var(--panel)] border border-[var(--wire)] text-white text-sm font-bold hover:border-[var(--glow)] transition-colors">
-                See ADZflow ↗
+              <Link href="#projects" className="block px-6 py-3.5 rounded-full bg-[var(--panel)] border border-[var(--wire)] text-white text-sm font-bold hover:border-[var(--glow)] transition-colors">
+                View projects ↓
               </Link>
             </Magnetic>
           </div>
@@ -100,7 +100,7 @@ export default function Hero() {
           ))}
 
           <p className="node run px-4 py-1.5 rounded-full font-mono text-xs text-[var(--muted)]" style={{ animationDelay: "1.4s", borderRadius: 999 }}>
-            Router · shipped to
+            Router · what I ship
           </p>
 
           {/* Router branch */}

@@ -6,7 +6,7 @@ import SectionHeader from "./SectionHeader";
 type Project = { title: string; category: string; description: string; features: string[]; href?: string };
 
 const projects: Project[] = [
-  { title: "ADZflow — ADZ Garage",       category: "Retail ERP · Live",       description: "Multi-branch retail, inventory and operations system: purchasing, supplier delivery portal, receiving, stock transfers, POS, roles and a full audit trail. In daily use across 3 branches.", features: ["Multi-Branch", "Warehouse", "Purchasing", "POS", "Audit Trail", "Reports"], href: "/adzflow" },
+  { title: "ADZflow — ADZ Garage",       category: "Retail ERP",       description: "Multi-branch retail, inventory and operations system: purchasing, supplier delivery portal, receiving, stock transfers, POS, roles and a full audit trail. In daily use across 3 branches.", features: ["Multi-Branch", "Warehouse", "Purchasing", "POS", "Audit Trail", "Reports"], href: "/adzflow" },
   { title: "CFS Jewelry Shop",          category: "Live Selling Automation", description: "Automation system for a jewelry shop's live selling operations — order capture, inventory deduction, and customer management for live streams.", features: ["Live Selling", "Order Automation", "Inventory", "Customer Mgmt"] },
   { title: "ADZ Garage Website",        category: "Web / Coming Soon",       description: "Premium automotive website with product showcase, online booking, brand catalog, and eCommerce functionality.",                     features: ["Online Booking", "Catalog", "eCommerce", "Responsive"] },
   { title: "AI Image Generator",        category: "Artificial Intelligence", description: "AI-powered image generation platform with prompt optimization, user authentication, subscription plans, and image history.", features: ["AI Generation", "Auth", "Subscriptions", "Prompt Opt.", "Image History"] },
@@ -32,16 +32,16 @@ export default function Projects() {
               <div key={p.title} className={`reveal delay-${Math.min((i % 3) + 1, 6)} ${inView ? "visible" : ""} group`}>
                 <Card
                   {...(featured ? { href: p.href } : {})}
-                  className={`node tilt h-full p-6 flex flex-col gap-4 ${featured ? "border-[var(--glow)] shadow-[0_0_0_4px_var(--halo)]" : ""}`}
+                  className="node tilt h-full p-6 flex flex-col gap-4"
                 >
                   <div className="flex items-center justify-between gap-3">
                     <span className="chip">{p.category}</span>
-                    <span aria-hidden="true" className={`w-2.5 h-2.5 rounded-full ${featured ? "bg-[var(--ok)] pulse" : "bg-[var(--wire)]"}`} />
+                    <span aria-hidden="true" className="w-2.5 h-2.5 rounded-full bg-[var(--wire)]" />
                   </div>
                   <div>
                     <h3 className="font-bold text-base text-white mb-2 flex items-center justify-between gap-2">
                       {p.title}
-                      {featured && <span className="text-[var(--glow)] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>}
+                      {featured && <span className="text-[var(--dim)] opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>}
                     </h3>
                     <p className="text-sm leading-relaxed text-[var(--muted)]">{p.description}</p>
                   </div>

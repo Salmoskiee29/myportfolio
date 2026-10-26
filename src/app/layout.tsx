@@ -7,7 +7,7 @@ const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["lati
 
 export const metadata: Metadata = {
   title: "Psalm David De Dios — Software Engineer · Full-Stack · Automation",
-  description: "Software engineer building POS, inventory, multi-branch and warehouse systems — plus the AI automations that tie them together. Creator of ADZflow, live at ADZ Garage.",
+  description: "Psalm David De Dios — software engineer who designs, builds and automates business systems: POS, inventory, multi-branch operations and AI workflows.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
