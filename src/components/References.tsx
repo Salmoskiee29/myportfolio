@@ -23,7 +23,7 @@ export default function References() {
   return (
     <section id="references" className="py-24" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
-        <SectionHeader n="08" label="references" inView={inView} delay={1.5} title="Character references" />
+        <SectionHeader n="07" label="references" inView={inView} delay={1.5} title="Character references" />
 
         <div className="grid sm:grid-cols-2 gap-5 max-w-2xl">
           {references.map((r, i) => (

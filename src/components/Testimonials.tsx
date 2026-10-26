@@ -41,7 +41,7 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="py-24" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
-        <SectionHeader n="06" label="testimonials" inView={inView} delay={0.3} title="What clients say" />
+        <SectionHeader n="05" label="testimonials" inView={inView} delay={0.3} title="What clients say" />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {testimonials.map((t, i) => (

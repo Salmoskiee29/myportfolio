@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const links = [
-  { label: "Case Study", href: "#case-study" },
-  { label: "Projects", href: "#projects" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -23,24 +23,24 @@ export default function Navbar() {
   return (
     <nav className={`fade-up-1 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || open ? "bg-[#121318]/85 backdrop-blur-md border-b border-[var(--line)]" : "bg-transparent border-b border-transparent"}`}>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-2 font-mono font-bold text-white">
+        <Link href="/" className="flex items-center gap-2 font-mono font-bold text-white">
           <span className="w-2 h-2 rounded-full bg-[var(--ok)] pulse" aria-hidden="true" />
           psalm<span className="text-[var(--muted)]">.workflow</span>
-        </a>
+        </Link>
 
         <ul className="hidden md:flex items-center gap-8">
           {links.map((l) => (
             <li key={l.label}>
-              <a href={l.href} className="link-underline text-[var(--muted)] hover:text-white text-sm font-semibold transition-colors">
+              <Link href={l.href} className="link-underline text-[var(--muted)] hover:text-white text-sm font-semibold transition-colors">
                 {l.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
-        <a href="#contact" className="shine hidden md:block text-sm font-extrabold px-5 py-2 rounded-full bg-[var(--glow)] text-[#121318] hover:brightness-110 transition">
+        <Link href="/#contact" className="shine hidden md:block text-sm font-extrabold px-5 py-2 rounded-full bg-[var(--glow)] text-[#121318] hover:brightness-110 transition">
           Hire Me
-        </a>
+        </Link>
 
         <button type="button" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} className="md:hidden text-white w-11 h-11 flex items-center justify-center">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -54,13 +54,13 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden border-t border-[var(--line)] px-6 py-5 flex flex-col gap-4">
           {links.map((l) => (
-            <a key={l.label} href={l.href} onClick={() => setOpen(false)} className="text-[var(--muted)] hover:text-white text-sm font-semibold">
+            <Link key={l.label} href={l.href} onClick={() => setOpen(false)} className="text-[var(--muted)] hover:text-white text-sm font-semibold">
               {l.label}
-            </a>
+            </Link>
           ))}
-          <a href="#contact" onClick={() => setOpen(false)} className="text-sm font-extrabold px-5 py-2.5 rounded-full bg-[var(--glow)] text-[#121318] text-center">
+          <Link href="/#contact" onClick={() => setOpen(false)} className="text-sm font-extrabold px-5 py-2.5 rounded-full bg-[var(--glow)] text-[#121318] text-center">
             Hire Me
-          </a>
+          </Link>
         </div>
       )}
     </nav>

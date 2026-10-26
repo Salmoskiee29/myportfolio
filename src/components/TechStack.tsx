@@ -65,7 +65,7 @@ export default function TechStack() {
   return (
     <section id="tools" className="py-24" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
-        <SectionHeader n="05" label="stack" inView={inView} delay={2.4} title="Tools & tech stack" />
+        <SectionHeader n="04" label="stack" inView={inView} delay={2.4} title="Tools & tech stack" />
 
         {/* Filter tabs */}
         <div className={`reveal delay-1 ${inView ? "visible" : ""} flex flex-wrap gap-2 mb-10`} role="group" aria-label="Filter tools">

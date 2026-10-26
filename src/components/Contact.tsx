@@ -16,7 +16,7 @@ export default function Contact() {
     <section id="contact" className="py-24" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
-          n="07" label="output" inView={inView} delay={0.9}
+          n="06" label="output" inView={inView} delay={0.9}
           title={<>Let&apos;s build something<br /><span className="text-[var(--glow)]">that runs on its own</span></>}
         />
 

@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
-import CaseStudy from "@/components/CaseStudy";
 import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
@@ -18,7 +17,6 @@ export default function Home() {
       <Navbar />
       <Hero />
       <About />
-      <CaseStudy />
       <Projects />
       <Services />
       <TechStack />

@@ -33,7 +33,7 @@ export default function Services() {
   return (
     <section id="services" className="py-24" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
-        <SectionHeader n="04" label="services" inView={inView} delay={1.8} title={<>How I work with<br />businesses</>} />
+        <SectionHeader n="03" label="services" inView={inView} delay={1.8} title={<>How I work with<br />businesses</>} />
 
         <div className={`reveal delay-1 ${inView ? "visible" : ""} flex flex-wrap gap-2 mb-12`}>
           {builds.map((b) => (

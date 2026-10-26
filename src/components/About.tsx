@@ -56,13 +56,9 @@ export default function About() {
         <div className="grid md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-8 items-start">
           {/* Left — photo + bio */}
           <div className={`reveal delay-2 ${inView ? "visible" : ""} node p-6 flex flex-col gap-6`}>
-            <div className="flex items-center gap-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/profile.jpg" alt="Psalm David De Dios" className="w-20 h-20 rounded-2xl object-cover object-top border border-[var(--line)]" />
-              <div>
-                <p className="font-extrabold text-white text-lg">Psalm David De Dios</p>
-                <p className="text-sm text-[var(--muted)]">Software Engineer · full-stack · automation</p>
-              </div>
+            <div>
+              <p className="font-extrabold text-white text-lg">Psalm David De Dios</p>
+              <p className="text-sm text-[var(--muted)]">Software Engineer · full-stack · automation</p>
             </div>
             <div className="space-y-4 text-[var(--muted)] leading-relaxed text-[15px]">
               <p>I&apos;m a Full Stack Developer from Nueva Ecija with 5+ years of freelance experience building POS software, inventory and warehouse systems, booking platforms, websites and AI automation for Philippine businesses.</p>

@@ -1,11 +1,12 @@
 "use client";
 import { useInView } from "@/hooks/useInView";
+import Link from "next/link";
 import SectionHeader from "./SectionHeader";
 
 type Project = { title: string; category: string; description: string; features: string[]; href?: string };
 
 const projects: Project[] = [
-  { title: "ADZflow — ADZ Garage",       category: "Retail ERP · Live",       description: "Multi-branch retail, inventory and operations system: purchasing, supplier delivery portal, receiving, stock transfers, POS, roles and a full audit trail. In daily use across 3 branches.", features: ["Multi-Branch", "Warehouse", "Purchasing", "POS", "Audit Trail", "Reports"], href: "#case-study" },
+  { title: "ADZflow — ADZ Garage",       category: "Retail ERP · Live",       description: "Multi-branch retail, inventory and operations system: purchasing, supplier delivery portal, receiving, stock transfers, POS, roles and a full audit trail. In daily use across 3 branches.", features: ["Multi-Branch", "Warehouse", "Purchasing", "POS", "Audit Trail", "Reports"], href: "/adzflow" },
   { title: "CFS Jewelry Shop",          category: "Live Selling Automation", description: "Automation system for a jewelry shop's live selling operations — order capture, inventory deduction, and customer management for live streams.", features: ["Live Selling", "Order Automation", "Inventory", "Customer Mgmt"] },
   { title: "ADZ Garage Website",        category: "Web / Coming Soon",       description: "Premium automotive website with product showcase, online booking, brand catalog, and eCommerce functionality.",                     features: ["Online Booking", "Catalog", "eCommerce", "Responsive"] },
   { title: "AI Image Generator",        category: "Artificial Intelligence", description: "AI-powered image generation platform with prompt optimization, user authentication, subscription plans, and image history.", features: ["AI Generation", "Auth", "Subscriptions", "Prompt Opt.", "Image History"] },
@@ -21,12 +22,12 @@ export default function Projects() {
   return (
     <section id="projects" className="py-24" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
-        <SectionHeader n="03" label="projects" inView={inView} delay={1.2} title="More projects" />
+        <SectionHeader n="02" label="projects" inView={inView} delay={1.2} title="Projects" />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {projects.map((p, i) => {
             const featured = Boolean(p.href);
-            const Card: React.ElementType = featured ? "a" : "div";
+            const Card: React.ElementType = featured ? Link : "div";
             return (
               <div key={p.title} className={`reveal delay-${Math.min((i % 3) + 1, 6)} ${inView ? "visible" : ""} group`}>
                 <Card

@@ -79,7 +79,7 @@ export default function CaseStudy() {
       <div className="max-w-6xl mx-auto px-6">
 
         <SectionHeader
-          n="02" label="case-study" inView={inView} delay={0.6}
+          n="ADZ" label="case-study" inView={inView} delay={0.6}
           title="ADZflow: retail, inventory & operations system for a multi-branch automotive business"
           intro={<>ADZ Garage sells tires, wheels, oils and 4x4 parts across three branches. Inventory lived in Excel and
             stock movements were hard to trace. I designed and built ADZflow as a single system for purchasing,

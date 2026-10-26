@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Magnetic from "./Magnetic";
 
 const steps = [
@@ -7,7 +8,7 @@ const steps = [
 ];
 
 const outputs = [
-  { title: "ADZflow", note: "live · 3 branches", href: "#case-study" },
+  { title: "ADZflow", note: "live · 3 branches", href: "/adzflow" },
   { title: "CFS Jewelry", note: "live selling", href: "#projects" },
   { title: "Meralco MGEN", note: "room booking", href: "#projects" },
 ];
@@ -27,9 +28,23 @@ export default function Hero() {
 
         {/* Left — text */}
         <div className="flex flex-col gap-5">
-          <p className="fade-up-1 font-mono text-[13px] text-[var(--muted)]">
-            scenario · psalm-de-dios · <span className="pulse text-[var(--ok)]">● ON</span>
-          </p>
+          {/* Profile photo, styled as the trigger node */}
+          <div className="fade-up-1 flex items-center gap-4">
+            <div className="node run relative p-1.5 rounded-[28px]" style={{ animationDelay: "0s" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/profile.jpg"
+                alt="Psalm David De Dios"
+                className="w-32 h-32 sm:w-40 sm:h-40 rounded-[22px] object-cover object-top"
+              />
+              <span aria-hidden="true" className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#16a34a] border-4 border-[var(--bg)]" />
+            </div>
+            <p className="font-mono text-[13px] text-[var(--muted)] leading-relaxed">
+              psalm.jpg<br />
+              scenario · <span className="pulse text-[var(--ok)]">● ON</span><br />
+              <span className="text-[var(--dim)]">available for projects</span>
+            </p>
+          </div>
 
           <h1 className="text-[64px] sm:text-[84px] font-extrabold text-white leading-[0.95] tracking-[-0.04em]" aria-label="Psalm De Dios">
             <span aria-hidden="true">
@@ -59,9 +74,9 @@ export default function Hero() {
               </a>
             </Magnetic>
             <Magnetic>
-              <a href="#case-study" className="block px-6 py-3.5 rounded-full bg-[var(--panel)] border border-[var(--wire)] text-white text-sm font-bold hover:border-[var(--glow)] transition-colors">
+              <Link href="/adzflow" className="block px-6 py-3.5 rounded-full bg-[var(--panel)] border border-[var(--wire)] text-white text-sm font-bold hover:border-[var(--glow)] transition-colors">
                 See ADZflow ↗
-              </a>
+              </Link>
             </Magnetic>
           </div>
         </div>
@@ -105,10 +120,10 @@ export default function Hero() {
 
           <div className="w-full grid grid-cols-3 gap-2.5">
             {outputs.map((o) => (
-              <a key={o.title} href={o.href} className="node run node-hover px-3.5 py-3 rounded-[14px]" style={{ animationDelay: "2.7s" }}>
+              <Link key={o.title} href={o.href} className="node run node-hover px-3.5 py-3 rounded-[14px]" style={{ animationDelay: "2.7s" }}>
                 <p className="font-extrabold text-white text-sm sm:text-base">{o.title}</p>
                 <p className="text-xs sm:text-[13px] text-[var(--muted)] mt-0.5">{o.note}</p>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
